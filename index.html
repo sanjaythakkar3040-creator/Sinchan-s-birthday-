@@ -85,6 +85,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
+            margin-bottom: 30px;
         }
         
         .photo-item {
@@ -117,6 +118,11 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            background: #f0f0f0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .photo-item img {
@@ -146,6 +152,102 @@
             font-size: 0.9em;
         }
         
+        .placeholder-text {
+            color: #999;
+            text-align: center;
+            font-size: 0.95em;
+            padding: 20px;
+        }
+        
+        .upload-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            border: 2px dashed #667eea;
+        }
+        
+        .upload-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .upload-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .upload-input-group label {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 5px;
+            display: block;
+            width: 100%;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-input-btn {
+            display: block;
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s;
+            width: 100%;
+            font-size: 0.9em;
+        }
+        
+        .file-input-btn:hover {
+            background: #5568d3;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .upload-status {
+            text-align: center;
+            font-size: 0.85em;
+            color: #667eea;
+            margin-top: 10px;
+        }
+        
         .footer {
             background: linear-gradient(135deg, #f5f7fa 0%, #f0f2f5 100%);
             padding: 30px 25px;
@@ -168,6 +270,31 @@
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .instructions h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        .instructions ol {
+            color: #555;
+            padding-left: 20px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
         }
         
         /* Mobile Responsive */
@@ -195,6 +322,14 @@
             .container {
                 border-radius: 15px;
             }
+            
+            .upload-input-group {
+                flex-direction: column;
+            }
+            
+            .file-input-wrapper {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
@@ -208,55 +343,133 @@
         
         <div class="gallery">
             <div class="gallery-title">✨ Photo Gallery ✨</div>
-            <div class="gallery-grid">
+            
+            <!-- Upload Section -->
+            <div class="upload-section">
+                <h3>📸 Add Your Photos</h3>
+                <div id="uploadContainer">
+                    <div class="upload-input-group">
+                        <label>Photo 1:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo1" accept="image/*">
+                            <label for="photo1" class="file-input-btn">Choose Photo 1</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 2:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo2" accept="image/*">
+                            <label for="photo2" class="file-input-btn">Choose Photo 2</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 3:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo3" accept="image/*">
+                            <label for="photo3" class="file-input-btn">Choose Photo 3</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 4:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo4" accept="image/*">
+                            <label for="photo4" class="file-input-btn">Choose Photo 4</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 5:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo5" accept="image/*">
+                            <label for="photo5" class="file-input-btn">Choose Photo 5</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 6:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo6" accept="image/*">
+                            <label for="photo6" class="file-input-btn">Choose Photo 6</label>
+                        </div>
+                    </div>
+                    <div class="upload-input-group">
+                        <label>Photo 7:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="photo7" accept="image/*">
+                            <label for="photo7" class="file-input-btn">Choose Photo 7</label>
+                        </div>
+                    </div>
+                </div>
+                <button class="upload-btn" onclick="loadPhotos()">📤 Load Photos</button>
+                <div class="upload-status" id="uploadStatus"></div>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo1.jpg" alt="Birthday Photo 1">
+                        <img src="" alt="Birthday Photo 1" id="img1" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder1" style="display:none;">Photo 1 - Click upload above</div>
                         <div class="photo-number">1</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo2.jpg" alt="Birthday Photo 2">
+                        <img src="" alt="Birthday Photo 2" id="img2" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder2" style="display:none;">Photo 2 - Click upload above</div>
                         <div class="photo-number">2</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo3.jpg" alt="Birthday Photo 3">
+                        <img src="" alt="Birthday Photo 3" id="img3" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder3" style="display:none;">Photo 3 - Click upload above</div>
                         <div class="photo-number">3</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo4.jpg" alt="Birthday Photo 4">
+                        <img src="" alt="Birthday Photo 4" id="img4" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder4" style="display:none;">Photo 4 - Click upload above</div>
                         <div class="photo-number">4</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo5.jpg" alt="Birthday Photo 5">
+                        <img src="" alt="Birthday Photo 5" id="img5" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder5" style="display:none;">Photo 5 - Click upload above</div>
                         <div class="photo-number">5</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo6.jpg" alt="Birthday Photo 6">
+                        <img src="" alt="Birthday Photo 6" id="img6" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder6" style="display:none;">Photo 6 - Click upload above</div>
                         <div class="photo-number">6</div>
                     </div>
                 </div>
                 
                 <div class="photo-item">
                     <div class="photo-wrapper">
-                        <img src="photos/photo7.jpg" alt="Birthday Photo 7">
+                        <img src="" alt="Birthday Photo 7" id="img7" onerror="showPlaceholder(this)">
+                        <div class="placeholder-text" id="placeholder7" style="display:none;">Photo 7 - Click upload above</div>
                         <div class="photo-number">7</div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="instructions">
+                <h4>📖 How to Use:</h4>
+                <ol>
+                    <li>Click "Choose Photo" buttons above to select your 7 photos</li>
+                    <li>Click "Load Photos" to display them in the gallery</li>
+                    <li>Photos are stored locally (in your browser)</li>
+                    <li>They'll stay until you refresh or clear browser data</li>
+                </ol>
             </div>
         </div>
         
@@ -265,5 +478,85 @@
             <p>Happy Birthday! 🎉</p>
         </div>
     </div>
+
+    <script>
+        function loadPhotos() {
+            let loadedCount = 0;
+            const statusDiv = document.getElementById('uploadStatus');
+            
+            for (let i = 1; i <= 7; i++) {
+                const fileInput = document.getElementById('photo' + i);
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    const photoNum = i;
+                    
+                    reader.onload = function(event) {
+                        const img = document.getElementById('img' + photoNum);
+                        const placeholder = document.getElementById('placeholder' + photoNum);
+                        img.src = event.target.result;
+                        img.style.display = 'block';
+                        if (placeholder) placeholder.style.display = 'none';
+                        
+                        // Store in localStorage
+                        localStorage.setItem('photo' + photoNum, event.target.result);
+                        loadedCount++;
+                        
+                        if (loadedCount === countLoadedPhotos()) {
+                            statusDiv.innerHTML = `✅ ${loadedCount} photo(s) loaded successfully!`;
+                            statusDiv.style.color = '#28a745';
+                        }
+                    };
+                    
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+            
+            if (loadedCount === 0) {
+                statusDiv.innerHTML = '❌ Please select at least one photo';
+                statusDiv.style.color = '#e74c3c';
+            }
+        }
+        
+        function countLoadedPhotos() {
+            let count = 0;
+            for (let i = 1; i <= 7; i++) {
+                if (document.getElementById('photo' + i).files && document.getElementById('photo' + i).files[0]) {
+                    count++;
+                }
+            }
+            return count;
+        }
+        
+        function showPlaceholder(img) {
+            const wrapper = img.parentElement;
+            const photoNum = img.id.replace('img', '');
+            const placeholder = document.getElementById('placeholder' + photoNum);
+            img.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'block';
+        }
+        
+        // Load photos from localStorage on page load
+        window.addEventListener('load', function() {
+            for (let i = 1; i <= 7; i++) {
+                const savedPhoto = localStorage.getItem('photo' + i);
+                if (savedPhoto) {
+                    const img = document.getElementById('img' + i);
+                    const placeholder = document.getElementById('placeholder' + i);
+                    img.src = savedPhoto;
+                    img.style.display = 'block';
+                    if (placeholder) placeholder.style.display = 'none';
+                }
+            }
+        });
+        
+        // Update button labels with filename when selected
+        for (let i = 1; i <= 7; i++) {
+            document.getElementById('photo' + i).addEventListener('change', function(e) {
+                const fileName = e.target.files[0]?.name || 'Choose Photo ' + i;
+                const btn = document.querySelector(`label[for="photo${i}"]`);
+                btn.textContent = fileName.length > 20 ? fileName.substring(0, 17) + '...' : fileName;
+            });
+        }
+    </script>
 </body>
 </html>
